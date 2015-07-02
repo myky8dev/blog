@@ -23,10 +23,6 @@ $navbar-default-color: $light-orange;
     text-decoration: none;
 }
 
-body {
-    padding-top: 80px;
-}
-
 .nav-item {
     margin-left: 25px;
     float: left;
@@ -54,5 +50,16 @@ h2 {
     margin-bottom: 30px;
     text-align: center;
     font-weight: normal;
+    color: #777;
+}
+
+.left {
+    text-align: left;
+    letter-spacing: .5px;
+}
+
+.footer {
+    margin-top: 25px;
+    border-top: 1px solid #eaeaea;
     color: #777;
 }
