@@ -11,22 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707102319) do
+ActiveRecord::Schema.define(version: 20150707100402) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "comments", force: true do |t|
     t.string   "commenter"
     t.text     "body"
+    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "article_id"
   end
 
   create_table "users", force: true do |t|
