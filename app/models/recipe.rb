@@ -7,8 +7,15 @@ class Recipe < ActiveRecord::Base
     validates :description, presence: true, length: { minimum: 20, maximum: 2000 }
     mount_uploader :picture, PictureUploader
     validate :picture_size
-    #rails validates :chef_id, presence: true
     
+    def thumbs_up_total
+        self.likes.where(like: true).size
+    end
+    
+    def thumbs_down_total
+        self.likes.where(like: false).size
+    end
+
     private
         def picture_size
             if picture.size > 5.megabytes
