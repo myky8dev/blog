@@ -18,9 +18,14 @@ $navbar-default-color: $light-orange;
     font-weight: bold;
 }
 
-#logo:hover{
+#logo:hover {
     color: white;
     text-decoration: none;
+}
+
+
+body {
+    padding-top: 80px;
 }
 
 .nav-item {
