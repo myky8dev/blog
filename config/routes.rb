@@ -19,6 +19,9 @@ Rails.application.routes.draw do
 
   resources :chefs, except: [:new]
 
+  resources :styles, :ingredients, only: [:new, :create, :show, :index]
+  
+
   get '/register', to: 'chefs#new'
 
   get '/login', to: "logins#new"
