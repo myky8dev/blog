@@ -18,11 +18,17 @@
 <%= will_paginate %>
 
 <hr/>
-<% @styles.each do |style| %>
+<% if @styles.any? %>
+    <% @styles.each do |style| %>
+        <div class="row">
+            <h4 class="center"> <%= link_to style.name, style_path(style) %> </h4>
+        </div>
+        <hr/>
+    <% end %>
+<% else %>
     <div class="row">
-        <h4> <%= link_to style.name, style_path(style) %> </h4>
+        <h4 class="center"> Styles are empty. </h4>
     </div>
     <hr/>
 <% end %>
-
 <%= will_paginate %>

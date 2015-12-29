@@ -18,9 +18,16 @@
 <%= will_paginate %>
 
 <hr/>
-<% @ingredients.each do |ingredient| %>
+<% if @ingredients.any? %>
+    <% @ingredients.each do |ingredient| %>
+        <div class="row">
+            <h4 class="center"> <%= link_to ingredient.name, ingredient_path(ingredient) %> </h4>
+        </div>
+        <hr/>
+    <% end %>
+<% else %>
     <div class="row">
-        <h4> <%= link_to ingredient.name, ingredient_path(ingredient) %> </h4>
+        <h4 class="center"> Ingredients are empty. </h4>
     </div>
     <hr/>
 <% end %>
