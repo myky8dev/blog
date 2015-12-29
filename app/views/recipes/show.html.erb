@@ -7,9 +7,12 @@
         </p>
     </div>
     <div class="col-md-8">
-        <% if logged_in? and @recipe.chef == current_user %>
-        <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %>
-        <% end %>
+        <% if logged_in? and (@recipe.chef == current_user or current_user.admin?) %>
+            <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %>
+        <% end unless current_user.nil? %>
+        <% if current_user.admin? %>
+            <%= link_to "Delete Recipe", @recipe, method: :delete, data: {confirm: "Are you sure?"},class: "btn btn-danger pull-right" %>
+        <% end unless current_user.nil? %>
         <h3><%= @recipe.summary %></h3>
         <div class="show_recipe">
             <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>

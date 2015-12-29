@@ -21,7 +21,11 @@
 <% if @styles.any? %>
     <% @styles.each do |style| %>
         <div class="row">
-            <h4 class="center"> <%= link_to style.name, style_path(style) %> </h4>
+            <h4 class="center"> <%= link_to style.name, style_path(style) %>
+            <% if current_user.admin? and ! style.recipes.any? %> 
+                <%= link_to "Delete style", style, method: :delete,  data: {confirm: "Are you sure?"},class: "btn btn-danger" %>
+            <% end unless current_user.nil? %>
+            </h4>
         </div>
         <hr/>
     <% end %>

@@ -20,4 +20,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_user
+    if ! current_user.admin?
+      flash[:danger] = "You can only edit your own recipes"
+      redirect_to recipes_path
+    end unless current_user.nil?
+  end
 end

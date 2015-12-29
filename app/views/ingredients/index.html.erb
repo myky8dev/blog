@@ -21,7 +21,11 @@
 <% if @ingredients.any? %>
     <% @ingredients.each do |ingredient| %>
         <div class="row">
-            <h4 class="center"> <%= link_to ingredient.name, ingredient_path(ingredient) %> </h4>
+            <h4 class="center"> <%= link_to ingredient.name, ingredient_path(ingredient) %> 
+            <% if current_user.admin? and ! ingredient.recipes.any? %> 
+                <%= link_to "Delete ingredient", ingredient, method: :delete,  data: {confirm: "Are you sure?"},class: "btn btn-danger" %>
+            <% end unless current_user.nil? %>
+            </h4>
         </div>
         <hr/>
     <% end %>

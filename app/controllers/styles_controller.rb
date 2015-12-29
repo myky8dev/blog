@@ -1,5 +1,6 @@
 class StylesController < ApplicationController
 	before_action :require_user, except: [:show, :index]
+	before_action :admin_user, only: [:destroy]
 	
 	def index
 		@styles = Style.paginate(page: params[:page], per_page: 4)
@@ -14,7 +15,7 @@ class StylesController < ApplicationController
 
 	    if @style.save
 	      flash[:success] = "Your style was created successfully!"
-	      redirect_to :back
+	      redirect_to styles_path
 	    else
 	      render :new
 	    end
@@ -23,6 +24,17 @@ class StylesController < ApplicationController
 	def show
 		@style = Style.find(params[:id])
 		@recipes = @style.recipes.paginate(page: params[:page], per_page: 4)
+	end
+
+	def destroy
+		style = Style.find(params[:id])
+		if ! style.recipes.any?
+			style.destroy
+			flash[:success] = "Style Deleted"
+		else
+			flash[:danger] = "Style can't be deleted"
+		end
+    	redirect_to styles_path
 	end
 
 	private 
