@@ -5,7 +5,7 @@
         <%= form_for(@style, html: { multipart: true }) do |f| %>
             <%= f.label :name %>
             <%= f.text_field :name %>
-           
+           	
             <%= f.submit(@style.new_record? ? 'Create Style' : 'Edit Style', class: "btn btn-success") %>
         <% end %>
     </div>

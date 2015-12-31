@@ -1,0 +1,7 @@
+<div class="well col-md-8">
+	<% @review = @new_review %>
+    <%= form_for(@review, url: add_review_recipe_path(@recipe,page: 1), html: { multipart: true }) do |f| %>
+        <%= f.text_area :comment %> 
+        <%= f.submit('Add comment', class: "btn btn-success") %>
+    <% end %>
+</div>

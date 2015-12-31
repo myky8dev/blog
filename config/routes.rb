@@ -14,13 +14,17 @@ Rails.application.routes.draw do
   resources :recipes do
     member do
       post 'like'
+      post 'add_review'
+      get 'edit_review'
+      patch 'update_review'
+      delete 'destroy_review'
     end
   end
 
   resources :chefs, except: [:new, :destroy]
 
   resources :styles, :ingredients, only: [:new, :create, :show, :index, :destroy]
-  
+
 
   get '/register', to: 'chefs#new'
 

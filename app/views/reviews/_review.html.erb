@@ -1,0 +1,20 @@
+<div class="show_recipe well">
+	<% if logged_in? and (review.chef == current_user or current_user.admin?) and @review == review %>
+		<p><strong>Commented by:</strong> <%= review.chef.chefname %></p>
+		<%= form_for(@review, url: update_review_recipe_path(@recipe,@review), html: { multipart: true }) do |f| %>
+    		<%= f.text_area :comment %> 
+			<small>Updated: <%= review.updated_at %>, Created: <%= review.created_at %></small>
+    		<%= f.submit('Save edit comment', class: "btn btn-success") %>
+		<% end %>
+	<% else %>
+		<p><strong>Commented by:</strong> <%= review.chef.chefname %></p>
+		<p><%= review.comment %></p>
+		<small>Updated: <%= review.updated_at %>, Created: <%= review.created_at %></small>
+		<% if logged_in? and (review.chef == current_user or current_user.admin?) %>
+			<%= link_to "Edit comment", edit_review_recipe_path(@recipe,review), class: "btn btn-success pull-right" %>
+		<% end %>
+		<% if logged_in? and current_user.admin? %>
+			<%= link_to "Delete comment", destroy_review_recipe_path(@recipe,review), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger pull-right" %>
+		<% end %>
+	<% end %>
+</div>

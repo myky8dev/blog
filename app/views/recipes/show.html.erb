@@ -1,3 +1,4 @@
+<%= render 'shared/errors',obj: @review %>
 <%= render 'shared/page_title', title: @recipe.name %>
 <div class="row">
     <div class="col-md-4 pull-right center">
@@ -7,11 +8,12 @@
         </p>
     </div>
     <div class="col-md-8">
-        <% if logged_in? and (@recipe.chef == current_user or current_user.admin?) %>
-            <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %>
-        <% end %>
+        <%= link_to 'Return to Recipes Listing', recipes_path, class: "btn btn-warning pull-right" %>
         <% if logged_in? and current_user.admin? %>
             <%= link_to "Delete Recipe", @recipe, method: :delete, data: {confirm: "Are you sure?"},class: "btn btn-danger pull-right" %>
+        <% end %>
+        <% if logged_in? and (@recipe.chef == current_user or current_user.admin?) %>
+            <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %>
         <% end %>
         <h3><%= @recipe.summary %></h3>
         <div class="show_recipe">
@@ -39,5 +41,22 @@
         </div>
     </div>
 </div>
-
-<h5><%= link_to 'Return to Recipes Listing', recipes_path, class: "btn btn-warning btn-small" %></h5>
+<hr/>
+<div class='row'>
+    <div class="col-md-8">
+        <strong><h4> Comments</h4></strong>
+        <% if @recipe.reviews.any? %>
+            <%= will_paginate @reviews %>
+            <%= render @reviews %>
+            <%= will_paginate @reviews %>
+        <% else %>
+            <p>This recipe don't have comments.</p>
+        <% end %>
+    </div>
+</div>
+<hr/>
+<div class='row'>
+    <% if logged_in? %>
+        <%= render 'add_review' %>
+    <% end %>
+</div>
