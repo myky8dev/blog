@@ -123,10 +123,12 @@ class RecipesController < ApplicationController
       if params[:page] != nil
         $page = params[:page]
       end
-      @reviews = @recipe.reviews.paginate(page: $page, per_page: 4).order('updated_at DESC')
-      if ! @reviews.any?
-        $page = $page.to_i - 1
+      if @recipe.reviews.any?
         @reviews = @recipe.reviews.paginate(page: $page, per_page: 4).order('updated_at DESC')
+        if ! @reviews.any?
+          $page = $page.to_i - 1
+          @reviews = @recipe.reviews.paginate(page: $page, per_page: 4).order('updated_at DESC')
+        end
       end
     end
 
